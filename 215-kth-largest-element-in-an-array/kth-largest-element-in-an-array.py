@@ -7,6 +7,5 @@ class Solution(object):
         """
 
         nums=sorted(nums)
-        print(nums)
         return nums[-k]
         
