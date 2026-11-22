@@ -6,34 +6,41 @@
  * };
  */
 
+struct ListNode* reverse(struct ListNode* start,struct ListNode* end){
+    struct ListNode* prev=NULL;
+    struct ListNode* nex=NULL;
+    struct ListNode* curr=start->next;
+
+    while(curr!=NULL){
+        nex=curr->next;
+        curr->next=prev;
+        prev=curr;
+        curr=nex;
+    }
+    return prev;
+}
+
 bool isPalindrome(struct ListNode* head) {
     if(head==NULL) return true;
 
-    struct ListNode* temp=head;
-    int count=0;
-    while(temp!=NULL){
-        count++;
-        temp=temp->next;
-    }
-    int arr[count],k=0;
+    struct ListNode* slow=head;
+    struct ListNode* fast=head;
 
-    temp=head;
-    while(temp!=NULL){
-        arr[k++]=temp->val;
-        temp=temp->next;
+    while(fast->next!=NULL && fast->next->next!=NULL){
+        slow=slow->next;
+        fast=fast->next->next;
     }
 
-    int j=count-1,i=0;
+    struct ListNode* second=reverse(slow,fast);
+    struct ListNode* first=head;
 
-    while(i<j){
-        if(arr[i]!=arr[j]){
+    while(second!=NULL){
+        if(first->val!=second->val){
             return false;
         }
-        i++;j--;
+        first=first->next;
+        second=second->next;
     }
-
     return true;
-
-
 
 }
