@@ -19,7 +19,7 @@ struct ListNode* removeElements(struct ListNode* head, int val) {
             else{
                 prev->next=temp->next;
                 free(temp);
-                temp=prev;
+                temp=prev->next;
             }
         }
         else{
@@ -28,6 +28,4 @@ struct ListNode* removeElements(struct ListNode* head, int val) {
         }
     }
     return head;
-
-    
 }
